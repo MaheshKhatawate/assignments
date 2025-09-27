@@ -6,7 +6,14 @@
 */
 
 function findLargestElement(numbers) {
-    
+    const ans = numbers.reduce((largest, curr)=>{
+        if(curr>largest){
+            largest=curr
+        }
+        return largest
+    },numbers[0])
+
+    return ans
 }
 
 module.exports = findLargestElement;
