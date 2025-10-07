@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop</title>
+    <style>
+        .container{
+            width: 300px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .draggable{
+            width: 100px;
+            height: 100px;
+            background: #4caf50;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: grab;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="drag-container">
+        <div class="draggable" id="drag-item" draggable="true">Drag Me</div>
+    </div>
+
+    <div class="container" id="drop-container">Drop here</div>
+
+    <script>
+        const dragItem = document.querySelector('#drag-item')
+        const dropContainer = document.querySelector('#drop-container')
+
+        //fired when drag starts
+        dragItem.addEventListener('dragstart',e=>{
+            e.dataTransfer.setData('text/plain', e.target.id)
+            e.target.style.opacity = '0.5'
+        })
+
+        //reset opacity when drag ends
+        dragItem.addEventListener('dragend', e => {
+            e.target.style.opacity='1'
+        })
+
+        // Allow drop 
+        dropContainer.addEventListener('dragover', e => {
+            e.preventDefault()
+            dropContainer.style.borderColor = ' #4caf50'
+        })
+
+        // When dropped 
+        dropContainer.addEventListener('drop', e => {
+            e.preventDefault()
+            const id = e.dataTransfer.getData('text/plain')
+            const dragged = document.getElementById(id)
+            dropContainer.appendChild(dragged)
+            dropContainer.style.borderColor = '#999'
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bg-colour changer</title>
+
+    <style>
+        body {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: end;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .colour-box {
+            margin: 2rem;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            height: 2rem;
+            width: 4rem;
+            padding: .2rem;
+            text-align: center;
+            cursor: pointer;
+            color: black;
+            font-weight: bold;
+        }
+
+        .add-button{
+            margin: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="colour-box">
+        <button onclick="changeColor('red')" style="background-color: red;">Red</button>
+        <button onclick="changeColor('yellow')" style="background-color: yellow;">Yellow</button>
+        <button onclick="changeColor('black')" style="background-color: black; color: white;">Black</button>
+        <button onclick="changeColor('purple')" style="background-color: purple;">Purple</button>
+        <button onclick="changeColor('green')" style="background-color: green;">Green</button>
+        <button onclick="changeColor('blue')" style="background-color: blue;">Blue</button>
+        <button onclick="changeColor('white')" style="background-color: white;">Default</button>
+    </div>
+    <button class="add-button" onclick="addColor()">+</button>
+
+    <script>
+        function changeColor(color) {
+            const body = document.querySelector('body')
+            body.style.background = color
+        }
+
+
+        function addColor() {
+            const color = prompt("Enter the colour: ")
+            const colourBox = document.querySelector('.colour-box')
+
+            const button = document.createElement('button')
+            button.innerHTML = color
+            button.style.background = color
+            button.setAttribute("onclick", `changeColor('${color}')`)
+            colourBox.appendChild(button)
+        }
+    </script>
+</body>
+
+</html>
